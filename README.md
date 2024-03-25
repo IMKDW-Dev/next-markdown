@@ -1,2 +1,3 @@
-# next-markdown
-Markdown Editor and Viewer of Next.js
+### @imkdw-dev/next-markdown
+
+Markdown Editor and View for Next.js
