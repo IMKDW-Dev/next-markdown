@@ -5,7 +5,7 @@ interface Props {
 }
 export default function ToolbarItem({ children }: Props) {
   return (
-    <li className="ml-0 border-r border-gray-300 h-2/3 w-[60px] flex justify-center items-center hover:bg-gray-200 last:border-none">
+    <li className="ml-0 flex h-2/3 w-[60px] items-center justify-center border-r border-gray-300 last:border-none hover:bg-gray-200">
       {children}
     </li>
   );

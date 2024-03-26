@@ -28,22 +28,7 @@ export default function MarkdownEditor({ width, height }: Props) {
 
   const changeContentHandler = (value: string) => {
     if (textareaRef.current) {
-      /**
-       * 기존에 문구가 없으면 value 텍스트를 그대로 설정함
-       * 기존에 문구가 있다면 value 텍스트를 추가함
-       *  단 이때 툴바에 있는 버튼 또는 단축키를 통해 추가되는 텍스트만 적용됨
-       */
-      if (content) {
-        setContent(value);
-      } else {
-        // const selectionStart = textareaRef.current?.selectionStart ?? 0;
-        // const selectionEnd = textareaRef.current?.selectionEnd ?? 0;
-        // const start = content.slice(0, selectionStart);
-        // const end = content.slice(selectionEnd);
-        // setContent(`${start}${value}${end}`);
-        setContent(value);
-      }
-
+      setContent(value);
       textareaRef.current.focus();
     }
   };
@@ -56,7 +41,7 @@ export default function MarkdownEditor({ width, height }: Props) {
         width: typeof width === 'number' ? `${width}px` : width,
       }}
     >
-      <Toolbar changeContent={changeContentHandler} content={content} />
+      <Toolbar changeContent={changeContentHandler} content={content} ref={textareaRef} />
       <div className="flex h-full w-full flex-row pt-[50px]">
         <TextArea content={content} changeContent={changeContentHandler} ref={textareaRef} />
         <Preview content={content} />
