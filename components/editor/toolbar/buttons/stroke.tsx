@@ -1,12 +1,12 @@
 import { ForwardedRef, forwardRef, useState } from 'react';
-import { FormatBold } from '@mui/icons-material';
+import { StrikethroughS } from '@mui/icons-material';
 
 interface Props {
   content: string;
   changeContent: (value: string) => void;
 }
 
-const Bold = forwardRef<HTMLTextAreaElement, Props>(
+const Stroke = forwardRef<HTMLTextAreaElement, Props>(
   ({ content, changeContent }, ref: ForwardedRef<HTMLTextAreaElement>) => {
     /**
      * Manage text dragged into Textarea State
@@ -19,11 +19,11 @@ const Bold = forwardRef<HTMLTextAreaElement, Props>(
     const setCursor = () => {
       if (ref && 'current' in ref && ref.current) {
         /**
-         * The position of the cursor is set to the middle of the bold tag
-         * ** ** - 3 characters in the middle of the bold tag
+         * The position of the cursor is set to the middle of the underline tag
+         * <U></U> - 3 characters in the middle of the underline tag
          */
-        const MIDDLE_POINTER = 2;
-        const position = content.length ? content.length + 3 : MIDDLE_POINTER;
+        const MIDDLE_POINTER = 1;
+        const position = content.length ? content.length + 2 : MIDDLE_POINTER;
 
         /**
          * Due to the timing of the setSelectionRange call
@@ -43,7 +43,7 @@ const Bold = forwardRef<HTMLTextAreaElement, Props>(
        * and add a newline character if the content is not empty
        */
       if (selectedText) {
-        const newText = `**${selectedText}**\n`;
+        const newText = `~${selectedText}~\n`;
         const startIndex = content.indexOf(selectedText);
         const endIndex = startIndex + selectedText.length;
         const [beforeText, afterText] = [content.slice(0, startIndex), content.slice(endIndex)];
@@ -54,14 +54,14 @@ const Bold = forwardRef<HTMLTextAreaElement, Props>(
          * If there is no selected text, add a # to the beginning of the content
          * TODO: Need to set cursor on middle
          */
-        changeContent(`${content}\n****`);
+        changeContent(`${content}\n~~`);
         setCursor();
       } else {
         /**
          * If there is no content, add a # to the content
          * TODO: Need to set cursor on middle
          */
-        changeContent('****');
+        changeContent('~~');
         setCursor();
       }
     };
@@ -85,12 +85,12 @@ const Bold = forwardRef<HTMLTextAreaElement, Props>(
         onMouseUp={mouseUpHandler}
         aria-label="format bold button "
       >
-        <FormatBold />
+        <StrikethroughS />
       </button>
     );
   },
 );
 
-Bold.displayName = 'Bold';
+Stroke.displayName = 'Stroke';
 
-export default Bold;
+export default Stroke;
